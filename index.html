@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Password Generator</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <div class="wrapper">
+    <header>
+      <h1>Password Generator</h1>
+    </header>
+    <div class="card">
+      <div class="card-header">
+        <h2>Generate a Password</h2>
+      </div>
+      <div class="card-body">
+        <textarea readonly id="password" placeholder="Your Secure Password" aria-label="Generated Password"></textarea>
+      </div>
+      <div class="card-footer">
+        <button id="generate" class="btn">Generate Password</button>
+      </div>
+    </div>
+
+    <!-- Form to input data -->
+    <div class="input-form">
+      <div class="input-form-header">
+        <h3>Enter password parameters below to generate password</h3>
+      </div>
+      <div class="input-form-body">
+
+        <p>Enter password length betwee 8 and 128:</p>
+        <textarea id="passwordLength" placeholder="Enter a number between 8 and 128"></textarea><br>
+        
+        <p>Select characters to include (must select at least one):</p>
+
+        <input type="checkbox" id="includeUppercase" name="includeUppercase" value="False">
+        <label for="includeUppercase"> Include uppercase letters</label><br>
+
+        <input type="checkbox" id="includeLowercase" name="includeLowercase" value="False">
+        <label for="includeLowercase"> Include lowercase letters</label><br>
+
+        <input type="checkbox" id="includeNumbers" name="includeNumbers" value="False">
+        <label for="includeNumbers"> Include numbers</label><br>
+
+        <input type="checkbox" id="includeSpecialChar" name="includeSpecialChar" value="False">
+        <label for="includeSpecialChar"> Include special characters</label><br>
+
+      </div>
+      <div class="input-form-footer">
+        <button id="confirm_parameters" class="btn">Confirm Parameters</button>
+      </div>
+    </div>
+    <!-- End of form to input data -->
+
+  </div>
+  <script src="script.js"></script>
+</body>
+
+</html>
