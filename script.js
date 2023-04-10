@@ -13,7 +13,6 @@ function writePassword() {
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
 
-
 var passwordLength = 0; //user input length
 
 var uppercaseChar = "ABCDEFGHIJKLMNOPQRSTUVWXTZ";
@@ -24,22 +23,26 @@ var specialChar = "!#$%&'()*+,-./:;<=>?@[]^_`{|}~";
 var includeUppercase = false;
 var includeLowercase = false;
 var includeNumbers = false;
-var includeSpecialChar = false; 
-
-var generatedPassword = ""; //empty string before generation
+var includeSpecialChar = false;
 
 //need create a string with all possible characters based on user input
+
+// includeUppercase = true;
+// includeNumbers = true;
+// includeNumbers = true;
+// includeSpecialChar = true;
+// passwordLength = 20;
 
 var allPossibleChar = "";
 
 if (includeUppercase == true) {
-  allPossibleChar = uppercaseChar; 
+  allPossibleChar = uppercaseChar;
 }
 if (includeLowercase == true) {
   allPossibleChar = allPossibleChar + lowercaseChar;
 }
 
-if (includeNumbers== true) {
+if (includeNumbers == true) {
   allPossibleChar = allPossibleChar + numbersChar;
 }
 
@@ -47,5 +50,23 @@ if (includeSpecialChar == true) {
   allPossibleChar = allPossibleChar + specialChar;
 }
 
-var lengthOfAvailChar = allPossibleChar.length();
+// console.log(allPossibleChar);
 
+var lengthOfAvailChar = allPossibleChar.length;
+
+// console.log(lengthOfAvailChar);
+
+var generatedPassword = ""; //string where new password will be added to
+
+function generatePassword(passwordLength) {
+  var i = 0;
+  while (i < passwordLength) {
+    generatedPassword += allPossibleChar.charAt(Math.floor(Math.random() * lengthOfAvailChar));
+    i += 1;
+  }
+  return generatedPassword;
+}
+
+generatedPassword = generatePassword(passwordLength);
+
+// console.log(generatedPassword);
