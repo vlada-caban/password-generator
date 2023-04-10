@@ -3,20 +3,40 @@ var generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
 function writePassword() {
-  var password = generatePassword();
-  var passwordText = document.querySelector("#password");
 
-  passwordText.value = password;
+// var passwordLength = prompt("Please enter password length between 8 and 128:", "8");
+// if (passwordLength <8 || passwordLength >128) {
+//   var passwordLength = prompt("Please enter password length between 8 and 128:", "8");
+// }
+// else {
+// }
 
+var passwordLength = Number(
+  window.prompt("Please enter password length between 8 and 128:", "8")
+);
+while (passwordLength <8 || passwordLength >128) {
+   var passwordLength = prompt("Please enter a valid length between 8 and 128:", "8")}
+
+
+
+ //original code
+ var password = generatePassword(passwordLength);
+ var passwordText = document.querySelector("#password");
+
+ passwordText.value = password;
+ 
 }
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
 
-var passwordLength = 0; //user input length
 
-var uppercaseChar = "ABCDEFGHIJKLMNOPQRSTUVWXTZ";
-var lowercaseChar = "abcdefghiklmnopqrstuvwxyz";
+//var passwordLength = 0; //user input length
+
+//need to add checkpoint to make sure passwordLength between 8 and 128
+
+var uppercaseChar = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+var lowercaseChar = "abcdefghijklmnopqrstuvwxyz";
 var numbersChar = "0123456789";
 var specialChar = "!#$%&'()*+,-./:;<=>?@[]^_`{|}~";
 
@@ -25,14 +45,16 @@ var includeLowercase = false;
 var includeNumbers = false;
 var includeSpecialChar = false;
 
+//need to add checkpoint that at least one of the above contions is TRUE / at least one box checked on the HTML form (IF okay to use form)
+
+//to test
+ includeUppercase = true;
+ includeLowercase = false;
+ includeNumbers = true;
+ includeSpecialChar = false;
+ //passwordLength = 10;
+
 //need create a string with all possible characters based on user input
-
-// includeUppercase = true;
-// includeNumbers = true;
-// includeNumbers = true;
-// includeSpecialChar = true;
-// passwordLength = 20;
-
 var allPossibleChar = "";
 
 if (includeUppercase == true) {
@@ -50,11 +72,13 @@ if (includeSpecialChar == true) {
   allPossibleChar = allPossibleChar + specialChar;
 }
 
-// console.log(allPossibleChar);
+//to test
+ console.log(allPossibleChar);
 
 var lengthOfAvailChar = allPossibleChar.length;
 
-// console.log(lengthOfAvailChar);
+//to test
+ console.log(lengthOfAvailChar);
 
 var generatedPassword = ""; //string where new password will be added to
 
@@ -69,4 +93,5 @@ function generatePassword(passwordLength) {
 
 generatedPassword = generatePassword(passwordLength);
 
-// console.log(generatedPassword);
+// to test
+ console.log(generatedPassword);
