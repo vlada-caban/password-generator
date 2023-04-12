@@ -1,35 +1,26 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
 
-// var password = "";
 
 // Write password to the #password input
 function writePassword() {
-// password = "";
-// document.querySelector("#password").textContent="";
 
-  // Askign user to input length and checking to be sure it is between 8 and 128
+  // Asking user to input length and checking to be sure it is between 8 and 128
   var passwordLength = Number(
     window.prompt("Please enter password length between 8 and 128:", "8")
   );
   while (passwordLength < 8 || passwordLength > 128) {
-    var passwordLength = Number( window.prompt(
+    passwordLength = Number( window.prompt(
       "Please enter a valid length number between 8 and 128:",
       "8")
     );
   }
 
-  //Clear text pox before generating password
-  // var blankText = document.querySelector("#password");
-  // blankText.value = "";
-
-  //original code - How to empty text box before generating new password?
+  //original code 
   var password = generatePassword(passwordLength);
   var passwordText = document.querySelector("#password");
 
-  console.log(password);
-
-  passwordText.value= password;
+  passwordText.value = password;
 }
 
 // Add event listener to generate button
@@ -43,20 +34,20 @@ generateBtn.addEventListener("click", writePassword);
 var uppercaseChar = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 var lowercaseChar = "abcdefghijklmnopqrstuvwxyz";
 var numbersChar = "0123456789";
-var specialChar = "!#$%&'()*+,-./:;<=>?@[]^_`{|}~";
+var specialChar = "!#$%&()*+,-./:;<=>?@[]^_{|}~";
 
 var includeUppercase = false;
 var includeLowercase = false;
 var includeNumbers = false;
 var includeSpecialChar = false;
 
-//need to add checkpoint that at least one of the above contions is TRUE / at least one box checked on the HTML form (IF okay to use form)
+//need to add checkpoint that at least one of the above conditions is TRUE / at least one box checked on the HTML form (IF okay to use form)
 
 //to test
 includeUppercase = true;
 includeLowercase = false;
 includeNumbers = true;
-includeSpecialChar = false;
+includeSpecialChar = true;
 //passwordLength = 10;
 
 //need create a string with all possible characters based on user input
@@ -85,12 +76,15 @@ var lengthOfAvailChar = allPossibleChar.length;
 //to test
 console.log(lengthOfAvailChar);
 
-var generatedPassword = ""; //string where new password will be added to
+//var generatedPassword = ""; 
 
 function generatePassword(passwordLength) {
+  var generatedPassword = ""; //string where new password will be added to
   var i = 0;
   while (i < passwordLength) {
-    generatedPassword += allPossibleChar.charAt(Math.floor(Math.random() * lengthOfAvailChar));
+    generatedPassword += allPossibleChar.charAt(
+      Math.floor(Math.random() * lengthOfAvailChar)
+    );
     i += 1;
   }
   return generatedPassword;
