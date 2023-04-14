@@ -1,15 +1,13 @@
 // Assignment Code
-var generateBtn = document.querySelector("#generate");
-
+let generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
 function writePassword() {
+  let passwordLength = checkLength();
+  let allPossibleChar = checkCharSet();
 
-  var passwordLength = checkLength();
-  var allPossibleChar = checkCharSet();
-
-  var password = generatePassword(passwordLength, allPossibleChar);
-  var passwordText = document.querySelector("#password");
+  let password = generatePassword(passwordLength, allPossibleChar);
+  let passwordText = document.querySelector("#password");
 
   passwordText.value = password;
 }
@@ -17,62 +15,86 @@ function writePassword() {
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
 
-
-//ADD function to check password length
+//Function to check password length
 function checkLength() {
-  var passwordLength = Number(
+  let passwordLengthInput = Number(
     window.prompt("Please enter password length between 8 and 128:", "8")
   );
-  while (passwordLength < 8 || passwordLength > 128) {
-    passwordLength = Number(
-      window.prompt("Please enter a valid length number between 8 and 128:", "8")
+
+  while (passwordLengthInput < 8 || passwordLengthInput > 128) {
+    passwordLengthInput = Number(
+      window.prompt(
+        "Please enter a valid length number between 8 and 128:",
+        "8"
+      )
     );
+    //can return and stop function if use didn't input a number?
   }
 
-  return passwordLength;
+  return passwordLengthInput;
 }
 
-//ADD function to check what characters 
+//Function to check character set
 function checkCharSet() {
-  var uppercaseChar = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  var lowercaseChar = "abcdefghijklmnopqrstuvwxyz";
-  var numbersChar = "0123456789";
-  var specialChar = "!#$%&()*+,-./:;<=>?@[]^_{|}~";
+  const uppercaseChar = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const lowercaseChar = "abcdefghijklmnopqrstuvwxyz";
+  const numbersChar = "0123456789";
+  const specialChar = "!#$%&()*+,-./:;<=>?@[]^_{|}~";
 
-  includeUppercase = true;
-  includeLowercase = false;
-  includeNumbers = true;
-  includeSpecialChar = true;
+  //need to confirm with the user what characters to include, asking user to confirm
+  let includeUppercase = false;
+  let includeLowercase = false;
+  let includeNumbers = false;
+  let includeSpecialChar = false;
 
-  var allPossibleChar = "";
+  let allPossibleCharInput = "";
 
-  if (includeUppercase == true) {
-    allPossibleChar = uppercaseChar;
+  // while (!includeUppercase || !includeLowercase || !includeNumbers || !includeSpecialChar) {}
+
+  includeUppercase = confirm("Would you like yo use Uppercase letters?");
+  includeLowercase = confirm("Would you like yo use Lowercase letters?");
+  includeNumbers = confirm("Would you like yo use Numbers?");
+  includeSpecialChar = confirm("Would you like yo use Special characters?");
+
+  if (includeUppercase) {
+    allPossibleCharInput = uppercaseChar;
   }
-  if (includeLowercase == true) {
-    allPossibleChar = allPossibleChar + lowercaseChar;
+  if (includeLowercase) {
+    allPossibleCharInput = allPossibleCharInput + lowercaseChar;
   }
-  if (includeNumbers == true) {
-    allPossibleChar = allPossibleChar + numbersChar;
+  if (includeNumbers) {
+    allPossibleCharInput = allPossibleCharInput + numbersChar;
   }
-  if (includeSpecialChar == true) {
-    allPossibleChar = allPossibleChar + specialChar;
+  if (includeSpecialChar) {
+    allPossibleCharInput = allPossibleCharInput + specialChar;
+  }
+  
+  console.log(allPossibleCharInput);
+
+  if (allPossibleCharInput === "") {
+    window.alert("Need to select at least one character set please!");
+    return allPossibleCharInput;
   }
 
-return allPossibleChar;
-
+  return allPossibleCharInput; //returns all possible characters for the password
 }
 
+//Function to generate
 function generatePassword(passwordLength, allPossibleChar) {
-  var lengthOfAvailChar = allPossibleChar.length;
-  var generatedPassword = ""; //string where new password will be added to
-  var i = 0;
-  while (i < passwordLength) {
-    generatedPassword += allPossibleChar.charAt(
-      Math.floor(Math.random() * lengthOfAvailChar)
-    );
-    i += 1;
+  if (allPossibleChar === "") {
+    return "Sorry, you need to select characters, please try again!";
   }
-  return generatedPassword;
+  else 
+  {
+    let lengthOfAvailChar = allPossibleChar.length; //checking length of character set
+    let generatedPassword = ""; //string where new password will be added to
+    let i = 0;
+    while (i < passwordLength) {
+      generatedPassword += allPossibleChar.charAt(
+        Math.floor(Math.random() * lengthOfAvailChar)
+      );
+      i++;
+    }
+    return generatedPassword;
+  }
 }
-
