@@ -1,19 +1,7 @@
 // Assignment Code
 let generateBtn = document.querySelector("#generate");
 
-// Write password to the #password input
-function writePassword() {
-  let passwordLength = checkLength();
-  let allPossibleChar = checkCharSet();
-
-  let password = generatePassword(passwordLength, allPossibleChar);
-  let passwordText = document.querySelector("#password");
-
-  passwordText.value = password;
-}
-
-// Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);
+let generatedPassword = "";
 
 //Function to check password length
 function checkLength() {
@@ -28,7 +16,6 @@ function checkLength() {
         "8"
       )
     );
-    //can return and stop function if use didn't input a number?
   }
 
   return passwordLengthInput;
@@ -41,7 +28,6 @@ function checkCharSet() {
   const numbersChar = "0123456789";
   const specialChar = "!#$%&()*+,-./:;<=>?@[]^_{|}~";
 
-  //need to confirm with the user what characters to include, asking user to confirm
   let includeUppercase = false;
   let includeLowercase = false;
   let includeNumbers = false;
@@ -49,27 +35,44 @@ function checkCharSet() {
 
   let allPossibleCharInput = "";
 
+  generatedPassword = ""; //resets generated password in case generate btn pressed again
+
   // while (!includeUppercase || !includeLowercase || !includeNumbers || !includeSpecialChar) {}
 
-  includeUppercase = confirm("Would you like yo use Uppercase letters?");
-  includeLowercase = confirm("Would you like yo use Lowercase letters?");
-  includeNumbers = confirm("Would you like yo use Numbers?");
-  includeSpecialChar = confirm("Would you like yo use Special characters?");
+  //confirming with the user what characters to include into password
+  includeUppercase = confirm("Would you like to use Uppercase letters?");
+  includeLowercase = confirm("Would you like to use Lowercase letters?");
+  includeNumbers = confirm("Would you like to use Numbers?");
+  includeSpecialChar = confirm("Would you like to use Special characters?");
 
   if (includeUppercase) {
     allPossibleCharInput = uppercaseChar;
+    generatedPassword = uppercaseChar.charAt(Math.floor(Math.random() * uppercaseChar.length));
+    // console.log(generatedPassword);
   }
   if (includeLowercase) {
-    allPossibleCharInput = allPossibleCharInput + lowercaseChar;
+    allPossibleCharInput += lowercaseChar;
+    generatedPassword += lowercaseChar.charAt(
+      Math.floor(Math.random() * lowercaseChar.length)
+    );
+    // console.log(generatedPassword);
   }
   if (includeNumbers) {
-    allPossibleCharInput = allPossibleCharInput + numbersChar;
+    allPossibleCharInput += numbersChar;
+    generatedPassword += numbersChar.charAt(
+      Math.floor(Math.random() * numbersChar.length)
+    );
+    // console.log(generatedPassword);
   }
   if (includeSpecialChar) {
-    allPossibleCharInput = allPossibleCharInput + specialChar;
+    allPossibleCharInput += specialChar;
+    generatedPassword += specialChar.charAt(
+      Math.floor(Math.random() * specialChar.length)
+    );
+    // console.log(generatedPassword);
   }
-  
-  console.log(allPossibleCharInput);
+
+  // console.log(allPossibleCharInput);
 
   if (allPossibleCharInput === "") {
     window.alert("Need to select at least one character set please!");
@@ -79,22 +82,36 @@ function checkCharSet() {
   return allPossibleCharInput; //returns all possible characters for the password
 }
 
-//Function to generate
+//Function to generate password
 function generatePassword(passwordLength, allPossibleChar) {
   if (allPossibleChar === "") {
-    return "Sorry, you need to select characters, please try again!";
+    return "Sorry, you need to select at least one set of characters, please try again!";
   }
   else 
   {
-    let lengthOfAvailChar = allPossibleChar.length; //checking length of character set
-    let generatedPassword = ""; //string where new password will be added to
-    let i = 0;
+    let i = generatedPassword.length; //setting starting point to be after 1 of each char set is added
     while (i < passwordLength) {
       generatedPassword += allPossibleChar.charAt(
-        Math.floor(Math.random() * lengthOfAvailChar)
+        Math.floor(Math.random() * allPossibleChar.length)
       );
       i++;
     }
+    // console.log(generatedPassword);
     return generatedPassword;
   }
 }
+
+// Write password to the #password input
+function writePassword() {
+  let passwordLength = checkLength();
+  let allPossibleChar = checkCharSet();
+
+  let password = generatePassword(passwordLength, allPossibleChar);
+  let passwordText = document.querySelector("#password");
+
+  passwordText.value = password;
+}
+
+// Add event listener to generate button
+generateBtn.addEventListener("click", writePassword);
+
