@@ -1,6 +1,7 @@
 // Assignment Code
 let generateBtn = document.querySelector("#generate");
 
+//global variables
 let allPossibleChar = "";
 let generatedPassword = "";
 
@@ -10,20 +11,13 @@ function checkLength() {
     window.prompt("Please enter password length between 8 and 128:", "8")
   );
 
-  while (passwordLengthInput < 8 || passwordLengthInput > 128) {
-    passwordLengthInput = Number(
-      window.prompt(
-        "Please enter a valid length number between 8 and 128:",
-        "8"
-      )
-    );
-  }
-
-  console.log(passwordLengthInput);
-  console.log(typeof passwordLengthInput);
-
-  if (isNaN(passwordLengthInput)) {
-    window.alert("Password length needs to be a number!");
+  //checking if password length is not a number and if it's between 8 and 128; returns 0 if criteria is not met
+  if (
+    isNaN(passwordLengthInput) ||
+    passwordLengthInput < 8 ||
+    passwordLengthInput > 128
+  ) {
+    window.alert("Password length needs to be a number between 8 and 128!");
     return 0;
   } else {
     return passwordLengthInput;
@@ -37,7 +31,7 @@ function checkCharSet() {
   const numbersChar = "0123456789";
   const specialChar = "!#$%&()*+,-./:;<=>?@[]^_{|}~";
 
-  //setting default values to false
+  //setting default values to false until user can select
   let includeUppercase = false;
   let includeLowercase = false;
   let includeNumbers = false;
@@ -47,59 +41,58 @@ function checkCharSet() {
 
   generatedPassword = ""; //resets generated password in case generate btn pressed again
 
-  // while (!includeUppercase || !includeLowercase || !includeNumbers || !includeSpecialChar) {}
-
   //confirming with the user what characters to include into password
   includeUppercase = confirm("Would you like to use Uppercase letters?");
   includeLowercase = confirm("Would you like to use Lowercase letters?");
   includeNumbers = confirm("Would you like to use Numbers?");
   includeSpecialChar = confirm("Would you like to use Special characters?");
 
+  //if include Uppercase is true, adding Uppercase letters to all possible characters set and adding random Uppercase character to the password
   if (includeUppercase) {
-    allPossibleCharInput = uppercaseChar;
-    generatedPassword = uppercaseChar.charAt(
+    allPossibleCharInput += uppercaseChar;
+    generatedPassword += uppercaseChar.charAt(
       Math.floor(Math.random() * uppercaseChar.length)
     );
-    // console.log(generatedPassword);
   }
+
+  //if include Lowercase is true, adding Lowercase letters to all possible characters set and adding random Lowercase character to the password
   if (includeLowercase) {
     allPossibleCharInput += lowercaseChar;
     generatedPassword += lowercaseChar.charAt(
       Math.floor(Math.random() * lowercaseChar.length)
     );
-    // console.log(generatedPassword);
   }
+
+  //if include Number is true, adding Numbers to all possible characters set and adding random Number to the password
   if (includeNumbers) {
     allPossibleCharInput += numbersChar;
     generatedPassword += numbersChar.charAt(
       Math.floor(Math.random() * numbersChar.length)
     );
-    // console.log(generatedPassword);
   }
+
+  //if include Special character is true, adding Special characters to all possible characters set and adding random Special character to the password
   if (includeSpecialChar) {
     allPossibleCharInput += specialChar;
     generatedPassword += specialChar.charAt(
       Math.floor(Math.random() * specialChar.length)
     );
-    // console.log(generatedPassword);
   }
-
-  //  console.log(allPossibleCharInput);
 
   if (allPossibleCharInput === "") {
     window.alert("Need to select at least one character set please!");
     return allPossibleCharInput;
-  }
-
-  return allPossibleCharInput; //returns all possible characters for the password
+  } else {
+    return allPossibleCharInput;
+  } 
 }
 
 //Function to generate password
 function generatePassword(passwordLength, allPossibleChar) {
   if (passwordLength === 0) {
-    return "Sorry, password length needs to be a valid number, please try again!";
+    return 'Sorry, password length needs to be a valid number between 8 and 128, please press "Generate Password" to try again!';
   } else if (allPossibleChar === "") {
-    return "Sorry, you need to select at least one set of characters, please try again!";
+    return 'Sorry, you need to select at least one set of characters, please press "Generate Password" to try again!';
   } else {
     let i = generatedPassword.length; //setting starting point to be after 1 of each char set is added
     while (i < passwordLength) {
@@ -108,7 +101,7 @@ function generatePassword(passwordLength, allPossibleChar) {
       );
       i++;
     }
-    // console.log(generatedPassword);
+    
     return generatedPassword;
   }
 }
@@ -117,6 +110,7 @@ function generatePassword(passwordLength, allPossibleChar) {
 function writePassword() {
   let passwordLength = checkLength();
 
+  //checking if valid password length number was returned before requesting to select characters
   if (passwordLength === 0) {
     allPossibleChar = "";
   } else {
