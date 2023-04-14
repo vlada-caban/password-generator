@@ -94,14 +94,14 @@ function generatePassword(passwordLength, allPossibleChar) {
   } else if (allPossibleChar === "") {
     return 'Sorry, you need to select at least one set of characters, please press "Generate Password" to try again!';
   } else {
-    let i = generatedPassword.length; //setting starting point to be after 1 of each char set is added
+    let i = generatedPassword.length; //setting starting point of the iterator to be after one of each char set is added
     while (i < passwordLength) {
       generatedPassword += allPossibleChar.charAt(
         Math.floor(Math.random() * allPossibleChar.length)
       );
       i++;
     }
-    
+    console.log("Yay! Password was generated: " + generatedPassword); //displayed in console for developers
     return generatedPassword;
   }
 }
