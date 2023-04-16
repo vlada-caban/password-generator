@@ -18,23 +18,23 @@ Web application is located at: https://vlada-caban.github.io/password-generator/
 
 To generate password user needs to click "Generate Password" button.
 
-![main image of the webpage](assets/full-page-screenshot.png)
+![main image of the webpage](assets/images/full-page-screenshot.png)
 
 After user clicks "Generate Password" button, pop up window prompts the user to enter desired password length between 8 and 128. 
 
-![length prompt image of the webpage](assets/correct-length-screenshot.png)
+![length prompt image of the webpage](assets/images/correct-length-screenshot.png)
 
 If user inputs invalid length outside of required parameters or inputs not a number, page will alert the user and they can try again by first, dismissing alert by clicking "OK" and then pressing "Generate Password" button again to enter a valid password length.
 
-![incorrect length image of the webpage](assets/incorrect-length-screenshot.png)
+![incorrect length image of the webpage](assets/images/incorrect-length-screenshot.png)
 
 After valid password length is entered, user will get series of confirmation windows asking to confirm the characters to be used for the password. At least one set of characters needs to be selected.
 
-![character confirmation image of the webpage](assets/character-input-screenshot.png)
+![character confirmation image of the webpage](assets/images/character-input-screenshot.png)
 
 Once character sets selections are confirmed, password will be generated and displayed in the text box.
 
-![generated password image of the webpage](assets/generated-password-screenshot.png)
+![generated password image of the webpage](assets/images/generated-password-screenshot.png)
 
 User can continue to generate more passwords with different criteria by pressing "Generate Password" button again. 
 
